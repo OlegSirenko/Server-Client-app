@@ -10,6 +10,9 @@ class Window(QMainWindow):
 
     def __init__(self):
         super(Window, self).__init__()
+        self.init_ui()
+
+    def init_ui(self):
         self.setWindowTitle("Host")
         layout = QVBoxLayout()
         self.centralWidget = QWidget()
@@ -34,7 +37,7 @@ class Window(QMainWindow):
 
         self.centralWidget.setLayout(layout)
 
-    def reportProgress(self, n):
+    def report_progress(self, n):
         self.label_connection.setText(f"Button pressed: {n}")
 
     def open_connection(self):
@@ -48,7 +51,7 @@ class Window(QMainWindow):
         self.connection.finished.connect(self.thread.quit)
         self.connection.finished.connect(self.connection.deleteLater)
         self.thread.finished.connect(self.thread.deleteLater)
-        self.connection.button.connect(self.reportProgress)
+        self.connection.button.connect(self.report_progress)
 
         self.thread.start()
         self.thread.finished.connect(
