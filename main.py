@@ -1,5 +1,4 @@
 import sys
-
 import socket
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
 from PyQt5.QtWidgets import QLabel
