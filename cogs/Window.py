@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QLabel
 from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtCore import QCoreApplication, pyqtSignal, QThread
 
+
 class Window(QMainWindow):
     stop_signal = pyqtSignal()
 
