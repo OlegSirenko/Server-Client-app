@@ -14,6 +14,7 @@ class Window(QMainWindow):
 
     def init_ui(self):
         self.setWindowTitle("Host")
+        self.setGeometry(250, 300, 250, 300)
         layout = QVBoxLayout()
         self.centralWidget = QWidget()
 

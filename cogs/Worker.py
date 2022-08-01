@@ -1,6 +1,5 @@
 import socket
-from PyQt5.QtCore import QObject, pyqtSignal, QThread
-from PyQt5.QtCore import  pyqtSignal
+from PyQt5.QtCore import QObject, pyqtSignal
 
 
 def init_socket():
