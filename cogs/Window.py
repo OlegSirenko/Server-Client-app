@@ -42,7 +42,6 @@ class Window(QMainWindow):
         self.label_connection.setText(f"Button pressed: {n}")
 
     def open_connection(self):
-        self.label_status.setText("To close connection click button")
         self.thread = QThread()
         self.connection = Worker()
         self.stop_signal.connect(self.connection.stop)
@@ -55,6 +54,7 @@ class Window(QMainWindow):
         self.connection.button.connect(self.report_progress)
 
         self.thread.start()
+        self.label_status.setText("To close connection click button")
         self.thread.finished.connect(
             lambda: self.label_connection.setText("Disconnected")
         )
