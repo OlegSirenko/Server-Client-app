@@ -22,19 +22,19 @@ class Window(QMainWindow):
         self.label_status = QLabel('To start host push the button')
         self.label_connection = QLabel("")
 
-        btnStart = QPushButton("Open Connection")
-        btnStop = QPushButton("Close Connection")
-        btnQuit = QPushButton("Close Application")
+        btn_start = QPushButton("Open Connection")
+        btn_stop = QPushButton("Close Connection")
+        btn_quit = QPushButton("Close Application")
 
-        btnStart.clicked.connect(self.open_connection)
-        btnStop.clicked.connect(self.close_connection)
-        btnQuit.clicked.connect(QCoreApplication.instance().quit)
+        btn_start.clicked.connect(self.open_connection)
+        btn_stop.clicked.connect(self.close_connection)
+        btn_quit.clicked.connect(QCoreApplication.instance().quit)
 
         layout.addWidget(self.label_status)
         layout.addWidget(self.label_connection)
-        layout.addWidget(btnStart)
-        layout.addWidget(btnStop)
-        layout.addWidget(btnQuit)
+        layout.addWidget(btn_start)
+        layout.addWidget(btn_stop)
+        layout.addWidget(btn_quit)
 
         self.centralWidget.setLayout(layout)
 
