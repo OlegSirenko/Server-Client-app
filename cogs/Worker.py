@@ -2,16 +2,6 @@ import socket
 from PyQt5.QtCore import QObject, pyqtSignal
 
 
-def init_socket():
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    host = '127.0.0.1'  # ip of host
-    port = 12345
-    server.bind((host, port))
-    server.listen(5)
-    c, addr = server.accept()
-    return server, c
-
-
 class Worker(QObject):
     finished = pyqtSignal()
     button = pyqtSignal(int)
@@ -20,8 +10,18 @@ class Worker(QObject):
         QObject.__init__(self, parent=parent)
         self.continue_run = True  # provide a bool run condition for the class
 
+    @staticmethod
+    def init_socket():
+        server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        host = '127.0.0.1'  # ip of host
+        port = 12345
+        server.bind((host, port))
+        server.listen(5)
+        c, addr = server.accept()
+        return server, c
+
     def run(self):
-        server, c = init_socket()
+        server, c = Worker.init_socket()
         switch = {b'1': 1, b'0': 0}
         while self.continue_run:
             client_message, _ = c.recvfrom(4096)
