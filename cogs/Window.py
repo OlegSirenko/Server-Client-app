@@ -1,5 +1,5 @@
 from cogs.Worker import Worker
-from PyQt5.QtWidgets import  QMainWindow, QVBoxLayout, QWidget
+from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget
 from PyQt5.QtWidgets import QLabel
 from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtCore import QCoreApplication, pyqtSignal, QThread
@@ -11,14 +11,15 @@ class Window(QMainWindow):
     def __init__(self):
         super(Window, self).__init__()
         self.init_ui()
+        self.thread = QThread()
+        self.connection = Worker()
 
     def init_ui(self):
         self.setWindowTitle("Host")
         self.setGeometry(250, 300, 250, 300)
         layout = QVBoxLayout()
-        self.centralWidget = QWidget()
-
-        self.setCentralWidget(self.centralWidget)
+        centralWidget = QWidget()
+        self.setCentralWidget(centralWidget)
         self.label_status = QLabel('To start host push the button')
         self.label_connection = QLabel("")
 
@@ -36,14 +37,12 @@ class Window(QMainWindow):
         layout.addWidget(btn_stop)
         layout.addWidget(btn_quit)
 
-        self.centralWidget.setLayout(layout)
+        centralWidget.setLayout(layout)
 
     def report_progress(self, n):
         self.label_connection.setText(f"Button pressed: {n}")
 
     def open_connection(self):
-        self.thread = QThread()
-        self.connection = Worker()
         self.stop_signal.connect(self.connection.stop)
         self.connection.moveToThread(self.thread)
         self.thread.started.connect(self.connection.run)
